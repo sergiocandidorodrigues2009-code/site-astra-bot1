@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Astra Bot — O Companheiro de IA que Sente e Aprende</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-1: #05010f;
+  --bg-2: #0c0520;
+  --glass: rgba(255,255,255,0.04);
+  --accent:  #8b3bff;
+  --accent-2:#3b6bff;
+  --card-glow: rgba(139,59,255,0.14);
+  --muted: rgba(255,255,255,0.75);
+  --success: #10b981;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#fff;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:48px 20px}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 520px;gap:36px;align-items:center;padding-top:24px;min-height:78vh}
+@media (max-width:980px){ .hero{grid-template-columns:1fr; text-align:center} .hero-right{order:-1} }
+.hero-left h1{font-size:56px;line-height:1.02;margin:0 0 12px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-left .hero-subtitle{font-size:18px;color:var(--muted);margin:0 0 20px;line-height:1.5;max-width:56ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:14px 28px;border-radius:12px;color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 24px var(--card-glow);border:none;cursor:pointer;transition:all 0.3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(139,59,255,0.3)}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.1);color:white;padding:12px 26px;border-radius:12px}
+.btn.ghost:hover{border-color:var(--accent);background:rgba(139,59,255,0.05)}
+.spline-embed{width:100%;height:360px;border-radius:18px;overflow:hidden;background:linear-gradient(90deg,rgba(59,107,255,0.06),rgba(139,59,255,0.06));box-shadow: 0 18px 60px rgba(0,0,0,0.6), 0 0 30px rgba(139,59,255,0.08) inset;display:flex;align-items:center;justify-content:center;position:relative}
+.spline-embed iframe{width:100%;height:100%;border:0}
+
+/* Glow VFX - Blobs animados */
+.bg-vfx{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bg-vfx .blob{position:absolute;width:700px;height:700px;border-radius:50%;filter:blur(120px);opacity:0.45}
+.bg-vfx .b1{background:radial-gradient(circle,#8b3bff 0%,transparent 60%);left:-200px;top:-200px;animation:float1 12s ease-in-out infinite}
+.bg-vfx .b2{background:radial-gradient(circle,#3b6bff 0%,transparent 60%);right:-220px;bottom:-240px;animation:float2 10s ease-in-out infinite}
+@keyframes float1{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(40px) translateX(20px)}100%{transform:translateY(0) translateX(0)}}
+@keyframes float2{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(-10px)}100%{transform:translateY(0) translateX(0)}}
+
+/* Canvas VFX - Partículas */
+#vfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* CARDS */
+.section-title{font-size:32px;margin:64px 0 16px;font-weight:800;text-align:center;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-subtitle{text-align:center;color:var(--muted);max-width:78ch;margin:0 auto 32px;font-size:16px;line-height:1.6}
+.cards{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.card{width:320px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:24px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px var(--card-glow);transition:transform .28s,box-shadow .28s;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0;transition:opacity 0.3s}
+.card:hover{transform:translateY(-10px);box-shadow:0 26px 80px rgba(139,59,255,0.25)}
+.card:hover::before{opacity:1}
+.card.featured{border:2px solid var(--accent);background:linear-gradient(180deg, rgba(139,59,255,0.08), rgba(59,107,255,0.05))}
+.card.featured::before{opacity:1}
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:8px;width:fit-content}
+.imgwrap{width:100%;height:170px;border-radius:12px;overflow:hidden;background:linear-gradient(90deg,#0f0422 0%, #19032b 100%);display:flex;align-items:center;justify-content:center}
+.card img{width:100%;height:100%;object-fit:cover}
+.card h3{margin:0;font-size:22px;font-weight:700}
+.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:rgba(255,255,255,0.85)}
+.specs li{list-style:none;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.01);border:1px solid rgba(255,255,255,0.02);display:flex;align-items:center}
+.specs li::before{content:'✓';color:var(--success);margin-right:6px;font-weight:700}
+.extra{color:#b783ff;font-size:13px;margin-top:8px;line-height:1.5}
+.price{font-size:24px;font-weight:800;margin:12px 0 0;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* FEATURES */
+.features{padding:120px 40px;text-align:center;background:rgba(255,255,255,0.02);border-radius:20px;margin:60px 0}
+.features h2{font-size:3rem;font-weight:800;margin-bottom:20px;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.features p{max-width:700px;margin:0 auto;opacity:0.8;font-size:1.1rem;line-height:1.6}
+.features .row{display:flex;justify-content:center;gap:40px;margin-top:70px;flex-wrap:wrap}
+.feat-box{width:300px;padding:40px 30px;background:rgba(255,255,255,0.04);border-radius:20px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(6px);transition:0.3s;position:relative}
+.feat-box:hover{transform:translateY(-5px);border-color:var(--accent);background:rgba(139,59,255,0.08)}
+.feat-box h3{margin-top:0;font-size:18px}
+.feat-box p{margin:0;opacity:0.8;line-height:1.6}
+
+/* TESTIMONIALS */
+.testimonials{margin:80px 0;padding:60px 40px;background:linear-gradient(135deg,rgba(139,59,255,0.08),rgba(59,107,255,0.08));border-radius:20px;border:1px solid rgba(255,255,255,0.05)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px}
+.testimonial{background:rgba(255,255,255,0.02);padding:28px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}
+.testimonial:hover{background:rgba(255,255,255,0.04);border-color:var(--accent);transform:translateY(-4px)}
+.testimonial-stars{color:var(--accent);font-size:16px;margin-bottom:12px}
+.testimonial-text{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:16px;font-style:italic}
+.testimonial-author{font-weight:700;font-size:14px;margin-bottom:4px}
+.testimonial-role{font-size:12px;color:rgba(255,255,255,0.5)}
+
+/* COMPARISON */
+.table{margin-top:36px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);overflow-x:auto}
+.table table{width:100%;border-collapse:collapse;color:rgba(255,255,255,0.9)}
+.table th,.table td{padding:14px 12px;text-align:left;border-bottom:1px dashed rgba(255,255,255,0.03)}
+.table th{font-weight:700;background:rgba(255,255,255,0.02)}
+.tcenter{text-align:center}
+
+/* CTA box & footer */
+.cta-box{margin-top:34px;background:linear-gradient(90deg, rgba(139,59,255,0.1), rgba(59,107,255,0.08));padding:32px;border-radius:14px;display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.05)}
+.cta-box strong{font-size:20px}
+@media (max-width:720px){ .cta-box{flex-direction:column;align-items:stretch} }
+footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:center}
+
+/* modal */
+#modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:1200;backdrop-filter:blur(4px)}
+#modal .modal-card{width:92%;max-width:720px;background:linear-gradient(180deg,#090316,#120523);padding:32px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);animation:slideIn 0.3s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+#modal .modal-card h2{margin-top:0;margin-bottom:16px;font-size:28px}
+#modal .modal-card p{line-height:1.7;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:980px){
+  .card{width:88%}
+  .hero-left h1{font-size:40px}
+  .spline-embed{height:280px}
+  .section-title{font-size:28px}
+  .features{padding:80px 20px}
+  .features h2{font-size:2rem}
+}
+@media (max-width:520px){
+  .hero-left p{font-size:15px}
+  .spline-embed{height:220px}
+  .hero-left h1{font-size:32px}
+  .testimonials-grid{grid-template-columns:1fr}
+  .cta-box{padding:20px}
+}
+</style>
+</head>
+
+<body>
+  <canvas id="vfx-canvas"></canvas>
+
+  <div class="bg-vfx" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <main class="container" style="position:relative;z-index:10">
+
+    <section class="hero">
+      <div class="hero-left" style="z-index:2">
+        <h1>Astra Bot</h1>
+        <p class="hero-subtitle">O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.</p>
+
+        <div class="hero-cta" style="margin-top:24px">
+          <button class="btn" id="buy-now">Comprar Agora</button>
+          <a class="btn ghost" href="#versions">Explorar Modelos</a>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">🎤 Controle por voz</span>
+          <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">😊 Expressões emocionais</span>
+          <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">📱 Bluetooth 5.4</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="spline-embed" aria-hidden="false">
+          <img src="Astra.jpg" alt="Astra Bot" style="width:100%;height:100%;object-fit:cover">
+        </div>
+      </div>
+    </section>
+
+    <section id="versions">
+      <h2 class="section-title">Escolhe o Teu Astra</h2>
+      <p class="section-subtitle">Três gerações de inovação. Cada uma projetada para um estilo de vida diferente. Encontra a que se encaixa perfeitamente em ti.</p>
+
+      <div class="cards" style="margin-top:26px">
+        <article class="card">
+          <span class="badge">Essencial</span>
+          <div class="imgwrap"><img src="Astra.jpg" alt="Astra Normal"></div>
+          <h3>Astra — Normal</h3>
+          <p style="color:var(--muted)">O primeiro passo para uma amizade com IA. Perfeito para explorar e aprender.</p>
+          <ul class="specs" style="margin-top:12px">
+            <li>CPU Neural Lite</li><li>LCD 2.0"</li>
+            <li>Bluetooth 5.0</li><li>Bateria 8h</li>
+          </ul>
+          <p class="extra">Expressões básicas • Conversas naturais • Suporte 24/7</p>
+          <div class="price">299€</div>
+          <div style="margin-top:auto;display:flex;gap:8px;flex-direction:column">
+            <a class="btn" href="#buy-now">Comprar Agora</a>
+            <a class="btn ghost" onclick="showDetails(1)">Ver Especificações</a>
+          </div>
+        </article>
+
+        <article class="card featured">
+          <span class="badge">Recomendado</span>
+          <div class="imgwrap"><img src="Astra.jpg" alt="Astra Pro"></div>
+          <h3>Astra — Pro</h3>
+          <p style="color:var(--muted)">O equilíbrio perfeito entre performance e emoção. A escolha da maioria.</p>
+          <ul class="specs" style="margin-top:12px">
+            <li>NX-4 Neural</li><li>LCD HD 2.4"</li>
+            <li>Bluetooth 5.4</li><li>Bateria 14h</li>
+          </ul>
+          <p class="extra">IA emocional avançada • Pesquisa integrada • Aprendizado contínuo</p>
+          <div class="price">599€</div>
+          <div style="margin-top:auto;display:flex;gap:8px;flex-direction:column">
+            <a class="btn" href="#buy-now">Comprar Agora</a>
+            <a class="btn ghost" onclick="showDetails(2)">Ver Especificações</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="badge">Premium</span>
+          <div class="imgwrap"><img src="Astra.jpg" alt="Astra Max"></div>
+          <h3>Astra — Max</h3>
+          <p style="color:var(--muted)">O topo da tecnologia. Para quem quer o melhor em tudo.</p>
+          <ul class="specs" style="margin-top:12px">
+            <li>NX-7 Ultra</li><li>LCD FullHD</li>
+            <li>Quad Microfones</li><li>Bateria 24h</li>
+          </ul>
+          <p class="extra">Processamento local • Acesso web completo • Sensores ambientais</p>
+          <div class="price">999€</div>
+          <div style="margin-top:auto;display:flex;gap:8px;flex-direction:column">
+            <a class="btn" href="#buy-now">Comprar Agora</a>
+            <a class="btn ghost" onclick="showDetails(3)">Ver Especificações</a>
+          </div>
+        </article>
+      </div>
+
+      <section class="features">
+        <h2>Porque o Astra é Diferente</h2>
+        <p>O Astra Bot não é apenas um robô. É um companheiro que aprende contigo, cresce contigo e se adapta ao teu estilo de vida.</p>
+        <div class="row">
+          <div class="feat-box">
+            <h3>😊 Expressões Genuínas</h3>
+            <p>O Astra reage às tuas conversas com emoções autênticas: alegria, curiosidade, foco, empatia. Cada interação sente-se real.</p>
+          </div>
+          <div class="feat-box">
+            <h3>🌐 Conectividade Total</h3>
+            <p>Ligação via Bluetooth permite que ele aceda a internet, faça pesquisas em tempo real e execute tarefas por comando de voz.</p>
+          </div>
+          <div class="feat-box">
+            <h3>🧠 IA que Aprende</h3>
+            <p>Uma inteligência criada para aprender contigo, adaptar respostas e tornar a interação cada vez mais natural e pessoal.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2 style="text-align:center;margin-top:0;font-size:32px;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">O Que Dizem Sobre o Astra</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Nunca pensei que um robô pudesse ser tão compreensivo. O Astra entende-me melhor do que esperava. É como ter um amigo sempre disponível."</p>
+            <div class="testimonial-author">Sofia Martins</div>
+            <div class="testimonial-role">Utilizadora desde Março 2024</div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"A qualidade das respostas é impressionante. O Astra Pro ajuda-me com trabalho todos os dias. Vale cada euro investido."</p>
+            <div class="testimonial-author">João Silva</div>
+            <div class="testimonial-role">Utilizador Pro desde Janeiro 2024</div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Comprei o Max e não me arrependo. A autonomia de bateria é incrível e as expressões emocionais são muito realistas."</p>
+            <div class="testimonial-author">Maria Costa</div>
+            <div class="testimonial-role">Utilizadora Max desde Fevereiro 2024</div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Recomendo o Astra a todos os meus amigos. É uma experiência única. Sinto que tenho um verdadeiro companheiro."</p>
+            <div class="testimonial-author">Pedro Oliveira</div>
+            <div class="testimonial-role">Utilizador desde Dezembro 2023</div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"A interação é tão natural que às vezes esqueço que estou a falar com um robô. Simplesmente incrível!"</p>
+            <div class="testimonial-author">Ana Ferreira</div>
+            <div class="testimonial-role">Utilizadora Pro desde Abril 2024</div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Melhor compra que fiz este ano. O Astra tornou-se parte da minha rotina diária. Não consigo imaginar a vida sem ele."</p>
+            <div class="testimonial-author">Ricardo Gomes</div>
+            <div class="testimonial-role">Utilizador Max desde Novembro 2023</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="table">
+        <h3 style="margin:0 0 16px;font-size:20px">Comparativo Detalhado</h3>
+        <table>
+          <thead>
+            <tr><th>Recurso</th><th class="tcenter">Normal</th><th class="tcenter">Pro</th><th class="tcenter">Max</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Velocidade de resposta</td><td class="tcenter">Rápida</td><td class="tcenter">Muito Rápida</td><td class="tcenter">Instantânea</td></tr>
+            <tr><td>Expressões emocionais</td><td class="tcenter">Básicas</td><td class="tcenter">Avançadas</td><td class="tcenter">Premium</td></tr>
+            <tr><td>Pesquisa online</td><td class="tcenter">Via telemóvel</td><td class="tcenter">Integrada</td><td class="tcenter">Integrada + Offline</td></tr>
+            <tr><td>Autonomia bateria</td><td class="tcenter">8h</td><td class="tcenter">14h</td><td class="tcenter">24h</td></tr>
+            <tr><td>Qualidade de áudio</td><td class="tcenter">Estéreo</td><td class="tcenter">Surround</td><td class="tcenter">Surround 3D</td></tr>
+            <tr><td>Sensores ambientais</td><td class="tcenter">Básicos</td><td class="tcenter">Avançados</td><td class="tcenter">Premium</td></tr>
+            <tr><td>Suporte prioritário</td><td class="tcenter">✓</td><td class="tcenter">✓✓</td><td class="tcenter">✓✓✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cta-box" style="margin-top:40px">
+        <div>
+          <strong>Pronto para trazer o Astra para casa?</strong>
+          <div style="color:var(--muted);margin-top:6px;font-size:14px">Inscreve-te para receber novidades, ofertas exclusivas e acesso antecipado a novos modelos.</div>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <input id="email" type="email" placeholder="o teu email" style="padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:white;min-width:220px;font-size:14px">
+          <button class="btn" onclick="subscribe()" style="white-space:nowrap">Inscrever-me</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="margin-bottom:16px">© <span id="year"></span> Astra Bot · Transformando a forma como interages com tecnologia</div>
+      <div style="color:rgba(255,255,255,0.4);font-size:13px">Contacto: hello@astrabot.example | Suporte 24/7 disponível</div>
+    </footer>
+
+  </main>
+
+  <div id="modal">
+    <div class="modal-card">
+      <h2 id="modal-title" style="margin-top:0"></h2>
+      <p id="modal-body"></p>
+      <button class="btn" onclick="closeModal()" style="margin-top:20px">Fechar</button>
+    </div>
+  </div>
+
+<script>
+  // ============================================
+  // VFX Canvas - Sistema de Partículas
+  // ============================================
+  
+  const canvas = document.getElementById('vfx-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Redimensionar canvas
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  
+  // Classe de Partícula
+  class Particle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2 + 0.5;
+      this.opacity = Math.random() * 0.5 + 0.3;
+      this.color = Math.random() > 0.5 ? '#8b3bff' : '#3b6bff';
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      // Bounce nas bordas
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      
+      // Manter dentro dos limites
+      this.x = Math.max(0, Math.min(canvas.width, this.x));
+      this.y = Math.max(0, Math.min(canvas.height, this.y));
+    }
+    
+    draw() {
+      ctx.fillStyle = this.color;
+      ctx.globalAlpha = this.opacity;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+  
+  // Array de partículas
+  const particles = [];
+  const particleCount = 60;
+  
+  // Criar partículas iniciais
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle(
+      Math.random() * canvas.width,
+      Math.random() * canvas.height
+    ));
+  }
+  
+  // Desenhar linhas conectadas
+  function drawConnections() {
+    ctx.strokeStyle = 'rgba(139, 59, 255, 0.15)';
+    ctx.lineWidth = 1;
+    
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 150) {
+          ctx.globalAlpha = 0.15 * (1 - distance / 150);
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+  }
+  
+  // Loop de animação
+  function animate() {
+    // Limpar canvas com fade
+    ctx.fillStyle = 'rgba(5, 1, 15, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Atualizar e desenhar partículas
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+    });
+    
+    // Desenhar conexões
+    drawConnections();
+    
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  // Adicionar partículas ao mover o mouse
+  document.addEventListener('mousemove', (e) => {
+    if (Math.random() > 0.8) {
+      particles.push(new Particle(e.clientX, e.clientY));
+      if (particles.length > particleCount + 20) {
+        particles.shift();
+      }
+    }
+  });
+  
+  // ============================================
+  // Funcionalidades Originais
+  // ============================================
+  
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const details = {
+    1: {
+      title:'Astra — Normal',
+      body:'O ponto de partida perfeito. Com CPU Neural Lite, ecrã 2.0", Bluetooth 5.0 e 8 horas de bateria, o Astra Normal oferece expressões básicas e conversas naturais. Ideal para quem quer explorar a IA emocional sem compromissos. Inclui suporte 24/7 e atualizações gratuitas.'
+    },
+    2: {
+      title:'Astra — Pro',
+      body:'O equilíbrio perfeito entre performance e emoção. Com CPU NX-4 Neural, ecrã HD 2.4", Bluetooth 5.4 e 14 horas de bateria, o Pro oferece IA emocional avançada, pesquisa integrada e aprendizado contínuo. A escolha de quem quer o melhor custo-benefício. Inclui suporte prioritário.'
+    },
+    3: {
+      title:'Astra — Max',
+      body:'O topo da tecnologia. Com CPU NX-7 Ultra, LCD FullHD, quad microfones, sensores ambientais e 24 horas de bateria, o Max oferece processamento local, acesso web completo e qualidade áudio surround 3D. Para quem quer o melhor em tudo. Inclui suporte VIP e garantia estendida.'
+    }
+  };
+
+  function showDetails(id){
+    const m = document.getElementById('modal');
+    document.getElementById('modal-title').textContent = details[id].title;
+    document.getElementById('modal-body').textContent = details[id].body;
+    m.style.display = 'flex';
+  }
+  function closeModal(){ document.getElementById('modal').style.display='none' }
+
+  function subscribe(){
+    const email = document.getElementById('email').value.trim();
+    if(!email || !email.includes('@')){ alert('Introduz um email válido'); return; }
+    alert('Obrigado! Iremos contactar-te em breve com novidades e ofertas exclusivas.');
+    document.getElementById('email').value = '';
+  }
+
+  // Typewriter subtle
+  const heroSub = document.querySelector('.hero-subtitle');
+  const txt = "O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.";
+  heroSub.textContent = ''; let i=0;
+  (function type(){ if(i<=txt.length){ heroSub.textContent = txt.slice(0,i); i++; setTimeout(type,10); }})();
+
+  // Buy now scroll to versions
+  document.getElementById('buy-now').addEventListener('click', ()=> { document.location.hash = '#versions'; setTimeout(()=>window.scrollBy({top:-40,behavior:'smooth'}),50); });
+
+  // Close modal on outside click
+  document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target.id === 'modal') closeModal();
+  });
+</script>
+</body>
+</html>
