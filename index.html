@@ -11,17 +11,162 @@
   --bg-1: #05010f;
   --bg-2: #0c0520;
   --glass: rgba(255,255,255,0.04);
-  --accent:  #8b3bff;
+  --accent:  #8b3bff;
   --accent-2:#3b6bff;
   --card-glow: rgba(139,59,255,0.14);
   --muted: rgba(255,255,255,0.75);
   --success: #10b981;
+  /* Novas Cores para a Intro Screen, baseadas na imagem */
+  --intro-bg-start: #39007f; 
+  --intro-bg-end: #0c0032;
 }
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#fff;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#fff;
+  /* Fundo principal mais escuro */
+  background:linear-gradient(180deg,var(--bg-1),var(--bg-2));
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
 .container{max-width:1200px;margin:0 auto;padding:48px 20px}
 
-/* HERO */
+/* --- NOVA INTRO SCREEN (INSPIRAÇÃO FOTO) --- */
+#intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    /* Gradiente vertical roxo/azul */
+    background: linear-gradient(180deg, var(--intro-bg-start) 0%, var(--intro-bg-end) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px 60px;
+    opacity: 1;
+    transition: opacity 1.5s ease-out; /* Transição de 1.5s */
+}
+#intro-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.intro-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Logótipo em gradiente para destaque */
+    background: linear-gradient(90deg, #b794f6, #805ad5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.intro-main-content {
+    max-width: 600px;
+    margin-top: 10vh;
+}
+.intro-main-content h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    margin: 0 0 10px;
+    line-height: 1.1;
+}
+.intro-main-content p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 50px;
+}
+.intro-vfx-flower {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(20%); /* Alinhar à direita */
+    width: 600px;
+    height: 600px;
+    background: url('https://br.pinterest.com/jdavidruas/flor-da-vida/'); /* Substitua isto por uma imagem SVG ou CSS real se tiver */
+    background: radial-gradient(circle, rgba(139,59,255,0.4) 0%, rgba(59,107,255,0.1) 60%, transparent 100%); /* Simulação de flor/geometria */
+    border-radius: 50%;
+    filter: blur(80px); /* Para um efeito mais abstrato */
+    animation: rotateFlower 20s linear infinite; /* Animação subtil */
+}
+@keyframes rotateFlower {
+    from { transform: translateY(-50%) translateX(20%) rotate(0deg); }
+    to { transform: translateY(-50%) translateX(20%) rotate(360deg); }
+}
+
+/* Key Content Boxes (Rodapé da Landing Page) */
+.key-content-boxes {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+.key-box {
+    width: 160px;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.08); /* Fundo de vidro */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    text-align: left;
+    transition: all 0.3s;
+}
+.key-box:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent);
+}
+.key-box .number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    color: var(--accent);
+}
+.key-box .title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.key-box .desc {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+.key-box .icon {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 980px) {
+    #intro-screen {
+        padding: 30px;
+        align-items: center;
+        text-align: center;
+    }
+    .intro-main-content {
+        max-width: 100%;
+        margin-top: 5vh;
+    }
+    .intro-main-content h1 {
+        font-size: 3rem;
+    }
+    .intro-main-content p {
+        font-size: 1rem;
+    }
+    .intro-vfx-flower {
+        display: none; /* Esconder a flor em ecrãs pequenos */
+    }
+    .key-content-boxes {
+        justify-content: center;
+    }
+    .key-box {
+        width: 140px;
+        height: 120px;
+        padding: 12px;
+    }
+}
+/* --- FIM NOVA INTRO SCREEN --- */
+
+
+/* HERO (Resto do seu CSS original...) */
 .hero{display:grid;grid-template-columns:1fr 520px;gap:36px;align-items:center;padding-top:24px;min-height:78vh}
 @media (max-width:980px){ .hero{grid-template-columns:1fr; text-align:center} .hero-right{order:-1} }
 .hero-left h1{font-size:56px;line-height:1.02;margin:0 0 12px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -45,7 +190,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
 /* Canvas VFX - Partículas */
 #vfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
 
-/* CARDS */
+/* CARDS, FEATURES, TESTIMONIALS, COMPARISON, CTA BOX e FOOTER (Resto do seu CSS original...) */
 .section-title{font-size:32px;margin:64px 0 16px;font-weight:800;text-align:center;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .section-subtitle{text-align:center;color:var(--muted);max-width:78ch;margin:0 auto 32px;font-size:16px;line-height:1.6}
 .cards{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:26px}
@@ -65,8 +210,6 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
 .specs li::before{content:'✓';color:var(--success);margin-right:6px;font-weight:700}
 .extra{color:#b783ff;font-size:13px;margin-top:8px;line-height:1.5}
 .price{font-size:24px;font-weight:800;margin:12px 0 0;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-/* FEATURES */
 .features{padding:120px 40px;text-align:center;background:rgba(255,255,255,0.02);border-radius:20px;margin:60px 0}
 .features h2{font-size:3rem;font-weight:800;margin-bottom:20px;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .features p{max-width:700px;margin:0 auto;opacity:0.8;font-size:1.1rem;line-height:1.6}
@@ -75,8 +218,6 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
 .feat-box:hover{transform:translateY(-5px);border-color:var(--accent);background:rgba(139,59,255,0.08)}
 .feat-box h3{margin-top:0;font-size:18px}
 .feat-box p{margin:0;opacity:0.8;line-height:1.6}
-
-/* TESTIMONIALS */
 .testimonials{margin:80px 0;padding:60px 40px;background:linear-gradient(135deg,rgba(139,59,255,0.08),rgba(59,107,255,0.08));border-radius:20px;border:1px solid rgba(255,255,255,0.05)}
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px}
 .testimonial{background:rgba(255,255,255,0.02);padding:28px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);transition:all 0.3s}
@@ -85,28 +226,20 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
 .testimonial-text{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:16px;font-style:italic}
 .testimonial-author{font-weight:700;font-size:14px;margin-bottom:4px}
 .testimonial-role{font-size:12px;color:rgba(255,255,255,0.5)}
-
-/* COMPARISON */
 .table{margin-top:36px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:24px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);overflow-x:auto}
 .table table{width:100%;border-collapse:collapse;color:rgba(255,255,255,0.9)}
 .table th,.table td{padding:14px 12px;text-align:left;border-bottom:1px dashed rgba(255,255,255,0.03)}
 .table th{font-weight:700;background:rgba(255,255,255,0.02)}
 .tcenter{text-align:center}
-
-/* CTA box & footer */
 .cta-box{margin-top:34px;background:linear-gradient(90deg, rgba(139,59,255,0.1), rgba(59,107,255,0.08));padding:32px;border-radius:14px;display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid rgba(255,255,255,0.05)}
 .cta-box strong{font-size:20px}
 @media (max-width:720px){ .cta-box{flex-direction:column;align-items:stretch} }
 footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:center}
-
-/* modal */
 #modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:1200;backdrop-filter:blur(4px)}
 #modal .modal-card{width:92%;max-width:720px;background:linear-gradient(180deg,#090316,#120523);padding:32px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);animation:slideIn 0.3s ease-out}
 @keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 #modal .modal-card h2{margin-top:0;margin-bottom:16px;font-size:28px}
 #modal .modal-card p{line-height:1.7;color:var(--muted)}
-
-/* Responsive */
 @media (max-width:980px){
   .card{width:88%}
   .hero-left h1{font-size:40px}
@@ -126,6 +259,46 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
 </head>
 
 <body>
+  
+  <div id="intro-screen">
+    <div class="intro-logo">
+      <span style="font-size: 1.8rem;">🤖</span>
+      Astra Bot
+    </div>
+
+    <div class="intro-main-content">
+      <h1 style="color: white;">Astra Bot</h1>
+      <h1 style="color: #b794f6; font-size: 3rem; margin-top: -10px;">Emotional AI</h1>
+      <p>Bem-vindo ao futuro da companhia. O Astra é o bot que não só responde, mas <strong style="color: #fff;">sente e aprende</strong> a tua personalidade, proporcionando uma interação verdadeiramente humana.</p>
+      
+      <button class="btn" id="start-journey-btn" style="padding: 18px 40px; font-size: 1.1rem;">Descobre o Astra</button>
+    </div>
+
+    <div class="intro-vfx-flower" aria-hidden="true"></div>
+
+    <div class="key-content-boxes">
+      <div class="key-box">
+        <span class="icon">🧠</span>
+        <div class="title">IA Emocional</div>
+        <div class="desc">Algoritmos de deteção de emoção de última geração.</div>
+      </div>
+      <div class="key-box">
+        <span class="icon">🚀</span>
+        <div class="title">Processamento</div>
+        <div class="desc">A potência do Raspberry Pi 5 para respostas instantâneas.</div>
+      </div>
+      <div class="key-box">
+        <span class="icon">💬</span>
+        <div class="title">Aprendizagem</div>
+        <div class="desc">Evolui continuamente com as tuas interações diárias.</div>
+      </div>
+      <div class="key-box">
+        <span class="icon">✨</span>
+        <div class="title">Design Holográfico</div>
+        <div class="desc">Um ecrã AMOLED que reflete o estado emocional.</div>
+      </div>
+    </div>
+  </div>
   <canvas id="vfx-canvas"></canvas>
 
   <div class="bg-vfx" aria-hidden="true">
@@ -133,14 +306,11 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
     <div class="blob b2"></div>
   </div>
 
-  <main class="container" style="position:relative;z-index:10">
-
+  <main class="container" style="position:relative;z-index:10; opacity:0; visibility:hidden; transition: opacity 1.5s ease-in, visibility 1.5s ease-in;">
     <section class="hero">
       <div class="hero-left" style="z-index:2">
         <h1>Astra Bot</h1>
-        <p class="hero-subtitle">O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.</p>
-
-        <div class="hero-cta" style="margin-top:24px">
+        <p class="hero-subtitle"></p><div class="hero-cta" style="margin-top:24px">
           <button class="btn" id="buy-now">Comprar Agora</button>
           <a class="btn ghost" href="#versions">Explorar Modelos</a>
         </div>
@@ -325,7 +495,46 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
 
 <script>
   // ============================================
-  // VFX Canvas - Sistema de Partículas
+  // Lógica da Tela de Introdução e Transição (ADAPTADO)
+  // ============================================
+  const introScreen = document.getElementById('intro-screen');
+  const startButton = document.getElementById('start-journey-btn');
+  const mainContent = document.querySelector('main.container');
+  
+  // Variáveis para a animação do texto do Hero
+  const heroSub = document.querySelector('.hero-subtitle');
+  const txt = "O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.";
+
+  function startTypewriter() {
+    heroSub.textContent = ''; 
+    let i=0;
+    
+    (function type(){ 
+        if(i<=txt.length){ 
+            heroSub.textContent = txt.slice(0,i); 
+            i++; 
+            setTimeout(type,10); 
+        }
+    })();
+  }
+  
+  function hideIntroScreen() {
+      // 1. Esconde a tela de introdução
+      introScreen.classList.add('hidden');
+      
+      // 2. Torna o conteúdo principal visível
+      mainContent.style.opacity = '1';
+      mainContent.style.visibility = 'visible';
+      
+      // 3. Inicia a animação de escrita no conteúdo principal após o fade
+      setTimeout(startTypewriter, 1500); // 1.5s (Igual ao CSS transition)
+  }
+
+  // Ação ao clicar no botão da Landing Page
+  startButton.addEventListener('click', hideIntroScreen);
+  
+  // ============================================
+  // VFX Canvas - Sistema de Partículas (MANTIDO)
   // ============================================
   
   const canvas = document.getElementById('vfx-canvas');
@@ -355,11 +564,9 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
       this.x += this.vx;
       this.y += this.vy;
       
-      // Bounce nas bordas
       if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
       
-      // Manter dentro dos limites
       this.x = Math.max(0, Math.min(canvas.width, this.x));
       this.y = Math.max(0, Math.min(canvas.height, this.y));
     }
@@ -378,7 +585,6 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
   const particles = [];
   const particleCount = 60;
   
-  // Criar partículas iniciais
   for (let i = 0; i < particleCount; i++) {
     particles.push(new Particle(
       Math.random() * canvas.width,
@@ -411,17 +617,14 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
   
   // Loop de animação
   function animate() {
-    // Limpar canvas com fade
     ctx.fillStyle = 'rgba(5, 1, 15, 0.1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Atualizar e desenhar partículas
     particles.forEach(particle => {
       particle.update();
       particle.draw();
     });
     
-    // Desenhar conexões
     drawConnections();
     
     requestAnimationFrame(animate);
@@ -429,7 +632,6 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
   
   animate();
   
-  // Adicionar partículas ao mover o mouse
   document.addEventListener('mousemove', (e) => {
     if (Math.random() > 0.8) {
       particles.push(new Particle(e.clientX, e.clientY));
@@ -440,7 +642,7 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
   });
   
   // ============================================
-  // Funcionalidades Originais
+  // Funcionalidades Originais (MANTIDO)
   // ============================================
   
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -475,11 +677,9 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
     document.getElementById('email').value = '';
   }
 
-  // Typewriter subtle
-  const heroSub = document.querySelector('.hero-subtitle');
-  const txt = "O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.";
-  heroSub.textContent = ''; let i=0;
-  (function type(){ if(i<=txt.length){ heroSub.textContent = txt.slice(0,i); i++; setTimeout(type,10); }})();
+  // Typewriter subtle: Removido o inicio automático, pois agora é ativado após o fade-out da intro screen
+  // heroSub.textContent = ''; let i=0;
+  // (function type(){ if(i<=txt.length){ heroSub.textContent = txt.slice(0,i); i++; setTimeout(type,10); }})();
 
   // Buy now scroll to versions
   document.getElementById('buy-now').addEventListener('click', ()=> { document.location.hash = '#versions'; setTimeout(()=>window.scrollBy({top:-40,behavior:'smooth'}),50); });
