@@ -170,8 +170,8 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
           <h3>Astra — Normal</h3>
           <p style="color:var(--muted)">O primeiro passo para uma amizade com IA. Perfeito para explorar e aprender.</p>
           <ul class="specs" style="margin-top:12px">
-            <li>CPU Neural Lite</li><li>LCD 2.0"</li>
-            <li>Bluetooth 5.0</li><li>Bateria 8h</li>
+            <li>Raspberry Pi 5 (8GB)</li><li>ReSpeaker Mic Array</li>
+            <li>microSDXC 64GB</li><li>Tela HDMI IPS 4.0"</li>
           </ul>
           <p class="extra">Expressões básicas • Conversas naturais • Suporte 24/7</p>
           <div class="price">299€</div>
@@ -187,8 +187,8 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
           <h3>Astra — Pro</h3>
           <p style="color:var(--muted)">O equilíbrio perfeito entre performance e emoção. A escolha da maioria.</p>
           <ul class="specs" style="margin-top:12px">
-            <li>NX-4 Neural</li><li>LCD HD 2.4"</li>
-            <li>Bluetooth 5.4</li><li>Bateria 14h</li>
+            <li>Raspberry Pi 5 (16GB)</li><li>Waveshare 5 polegadas HDMI LCD (800x480)</li>
+            <li>ReSpeaker 6-Mic</li><li>SanDisk Extreme PRO 128 GB cartão microSDXC</li>
           </ul>
           <p class="extra">IA emocional avançada • Pesquisa integrada • Aprendizado contínuo</p>
           <div class="price">599€</div>
@@ -204,8 +204,8 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
           <h3>Astra — Max</h3>
           <p style="color:var(--muted)">O topo da tecnologia. Para quem quer o melhor em tudo.</p>
           <ul class="specs" style="margin-top:12px">
-            <li>NX-7 Ultra</li><li>LCD FullHD</li>
-            <li>Quad Microfones</li><li>Bateria 24h</li>
+            <li>Raspberry Pi 5 (16GB)</li><li>Waveshare 5.5 polegadas HDMI AMOLED Display (1080x1920)</li>
+            <li>SanDisk Extreme PRO 512 GB cartão microSDXC </li><li>miniDSP UMA-16</li>
           </ul>
           <p class="extra">Processamento local • Acesso web completo • Sensores ambientais</p>
           <div class="price">999€</div>
@@ -284,12 +284,12 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
             <tr><th>Recurso</th><th class="tcenter">Normal</th><th class="tcenter">Pro</th><th class="tcenter">Max</th></tr>
           </thead>
           <tbody>
-            <tr><td>Velocidade de resposta</td><td class="tcenter">Rápida</td><td class="tcenter">Muito Rápida</td><td class="tcenter">Instantânea</td></tr>
+            <tr><td>Processador</td><td class="tcenter">Raspberry Pi 5 (8GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td></tr>
+            <tr><td>Microfones</td><td class="tcenter">ReSpeaker v3.0</td><td class="tcenter">ReSpeaker 6-Mic</td><td class="tcenter">miniDSP UMA-16</td></tr>
+            <tr><td>Ecrã</td><td class="tcenter">HDMI IPS 4.0"</td><td class="tcenter">Waveshare 5 polegadas HDMI LCD (800x480)</td><td class="tcenter">Waveshare 5.5 polegadas HDMI AMOLED Display (1080x1920)</td></tr>
+            <tr><td>Armazenamento</td><td class="tcenter">microSDXC 64GB</td><td class="tcenter">SanDisk Extreme PRO 128 GB cartão microSDXC</td><td class="tcenter">SanDisk Extreme PRO 512 GB cartão microSDXC</td></tr>
+            <tr><td>Autonomia bateria portatil</td><td class="tcenter">5h</td><td class="tcenter">12h</td><td class="tcenter">17h</td></tr>
             <tr><td>Expressões emocionais</td><td class="tcenter">Básicas</td><td class="tcenter">Avançadas</td><td class="tcenter">Premium</td></tr>
-            <tr><td>Pesquisa online</td><td class="tcenter">Via telemóvel</td><td class="tcenter">Integrada</td><td class="tcenter">Integrada + Offline</td></tr>
-            <tr><td>Autonomia bateria</td><td class="tcenter">8h</td><td class="tcenter">14h</td><td class="tcenter">24h</td></tr>
-            <tr><td>Qualidade de áudio</td><td class="tcenter">Estéreo</td><td class="tcenter">Surround</td><td class="tcenter">Surround 3D</td></tr>
-            <tr><td>Sensores ambientais</td><td class="tcenter">Básicos</td><td class="tcenter">Avançados</td><td class="tcenter">Premium</td></tr>
             <tr><td>Suporte prioritário</td><td class="tcenter">✓</td><td class="tcenter">✓✓</td><td class="tcenter">✓✓✓</td></tr>
           </tbody>
         </table>
@@ -448,15 +448,15 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
   const details = {
     1: {
       title:'Astra — Normal',
-      body:'O ponto de partida perfeito. Com CPU Neural Lite, ecrã 2.0", Bluetooth 5.0 e 8 horas de bateria, o Astra Normal oferece expressões básicas e conversas naturais. Ideal para quem quer explorar a IA emocional sem compromissos. Inclui suporte 24/7 e atualizações gratuitas.'
+      body:'O ponto de partida perfeito. Construído com Raspberry Pi 5 (8GB), Conjunto de microfones ReSpeaker v3.0, microSDXC Kingston de 64 GB e Tela HDMI IPS de 4.0". O Astra Normal oferece expressões básicas e conversas naturais. Ideal para quem quer explorar a IA emocional sem compromissos. Inclui suporte 24/7 e atualizações gratuitas.'
     },
     2: {
       title:'Astra — Pro',
-      body:'O equilíbrio perfeito entre performance e emoção. Com CPU NX-4 Neural, ecrã HD 2.4", Bluetooth 5.4 e 14 horas de bateria, o Pro oferece IA emocional avançada, pesquisa integrada e aprendizado contínuo. A escolha de quem quer o melhor custo-benefício. Inclui suporte prioritário.'
+      body:'O equilíbrio perfeito entre performance e emoção. Com Raspberry Pi 5 (16GB), Waveshare 5 polegadas HDMI LCD (800x480), ReSpeaker 6-Mic e SanDisk Extreme PRO 128 GB cartão microSDXC, o Pro oferece IA emocional avançada, pesquisa integrada e aprendizado contínuo. A escolha de quem quer o melhor custo-benefício. Inclui suporte prioritário.'
     },
     3: {
       title:'Astra — Max',
-      body:'O topo da tecnologia. Com CPU NX-7 Ultra, LCD FullHD, quad microfones, sensores ambientais e 24 horas de bateria, o Max oferece processamento local, acesso web completo e qualidade áudio surround 3D. Para quem quer o melhor em tudo. Inclui suporte VIP e garantia estendida.'
+      body:'O topo da tecnologia. Com Raspberry Pi 5 (16GB), Waveshare 5.5 polegadas HDMI AMOLED Display (1080x1920), SanDisk Extreme PRO 512 GB cartão microSDXC e 17 horas de bateria portatil, o Max oferece processamento local, acesso web completo e qualidade áudio surround 3D. Para quem quer o melhor em tudo. Inclui suporte VIP e garantia estendida.'
     }
   };
 
