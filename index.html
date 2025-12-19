@@ -13,7 +13,7 @@
 :root{
     --bg-1: #05010f;
     --bg-2: #0c0520;
-    --accent: 	#8b3bff; /* Roxo Principal */
+    --accent:   #8b3bff; /* Roxo Principal */
     --accent-2:#3b6bff; /* Azul Secundário */
     --muted: rgba(255,255,255,0.75);
     
@@ -385,6 +385,26 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe U
     box-shadow: 0 10px 30px rgba(139,59,255,0.4);
 }
 
+.botao-comprar1 {
+    width: 100%; /* Largura total da caixa */
+    background: var(--button-gradient);
+    padding: 14px 28px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px var(--button-shadow);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.botao-comprar1:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(32, 251, 203, 0.4);
+}
+
 .botao-specs-ghost {
     width: 100%;
     background: transparent;
@@ -470,527 +490,570 @@ footer{margin-top:48px;padding:26px 0;color:rgba(255,255,255,0.6);text-align:cen
 </head>
 
 <body>
-	
-	<div id="intro-screen">
-		<div class="intro-logo">
-			<span style="font-size: 1.8rem;">🤖</span>
-			Astra Bot
-		</div>
+    
+    <div id="intro-screen">
+        <div class="intro-logo">
+            <span style="font-size: 1.8rem;">🤖</span>
+            Astra Bot
+        </div>
 
-		<div class="intro-main-content">
-			<h1 style="color: white;">Astra Bot</h1>
-			<h1 style="color: #b794f6; font-size: 3rem; margin-top: -10px;">Emotional AI</h1>
-			<p>Bem-vindo ao futuro da companhia. O Astra é o bot que não só responde, mas <strong style="color: #fff;">sente e aprende</strong> a tua personalidade, proporcionando uma interação verdadeiramente humana.</p>
-			
-			<button class="btn" id="start-journey-btn" style="padding: 18px 40px; font-size: 1.1rem;">Descobre o Astra</button>
-		</div>
+        <div class="intro-main-content">
+            <h1 style="color: white;">Astra Bot</h1>
+            <h1 style="color: #b794f6; font-size: 3rem; margin-top: -10px;">Emotional AI</h1>
+            <p>Bem-vindo ao futuro da companhia. O Astra é o bot que não só responde, mas <strong style="color: #fff;">sente e aprende</strong> a tua personalidade, proporcionando uma interação verdadeiramente humana.</p>
+            
+            <button class="btn" id="start-journey-btn" style="padding: 18px 40px; font-size: 1.1rem;">Descobre o Astra</button>
+        </div>
 
-		<div class="intro-vfx-flower" aria-hidden="true"></div>
+        <div class="intro-vfx-flower" aria-hidden="true"></div>
 
-		<div class="key-content-boxes">
-			<div class="key-box">
-				<span class="icon">🧠</span>
-				<div class="title">IA Emocional</div>
-				<div class="desc">Algoritmos de deteção de emoção de última geração.</div>
-			</div>
-			<div class="key-box">
-				<span class="icon">🚀</span>
-				<div class="title">Processamento</div>
-				<div class="desc">A potência do Raspberry Pi 5 para respostas instantâneas.</div>
-			</div>
-			<div class="key-box">
-				<span class="icon">💬</span>
-				<div class="title">Aprendizagem</div>
-				<div class="desc">Evolui continuamente com as tuas interações diárias.</div>
-			</div>
-			<div class="key-box">
-				<span class="icon">✨</span>
-				<div class="title">Design Holográfico</div>
-				<div class="desc">Um ecrã AMOLED que reflete o estado emocional.</div>
-			</div>
-		</div>
-	</div>
-	<canvas id="vfx-canvas"></canvas>
+        <div class="key-content-boxes">
+            <div class="key-box">
+                <span class="icon">🧠</span>
+                <div class="title">IA Emocional</div>
+                <div class="desc">Algoritmos de deteção de emoção de última geração.</div>
+            </div>
+            <div class="key-box">
+                <span class="icon">🚀</span>
+                <div class="title">Processamento</div>
+                <div class="desc">A potência do Raspberry Pi 5 para respostas instantâneas.</div>
+            </div>
+            <div class="key-box">
+                <span class="icon">💬</span>
+                <div class="title">Aprendizagem</div>
+                <div class="desc">Evolui continuamente com as tuas interações diárias.</div>
+            </div>
+            <div class="key-box">
+                <span class="icon">✨</span>
+                <div class="title">Design Holográfico</div>
+                <div class="desc">Um ecrã AMOLED que reflete o estado emocional.</div>
+            </div>
+        </div>
+    </div>
+    <canvas id="vfx-canvas"></canvas>
 
-	<div class="bg-vfx" aria-hidden="true">
-		<div class="blob b1"></div>
-		<div class="blob b2"></div>
-	</div>
+    <div class="bg-vfx" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+    </div>
 
-	<main class="container" style="position:relative;z-index:10; opacity:0; visibility:hidden; transition: opacity 1.5s ease-in, visibility 1.5s ease-in;">
-		<section class="hero">
-			<div class="hero-left" style="z-index:2">
-				<h1>Astra Bot</h1>
-				<p class="hero-subtitle"></p>
-				<div class="hero-cta" style="margin-top:24px">
-					<button class="botao-comprar" id="buy-now" style="width:auto">Comprar Agora</button>
-					<a class="btn ghost" href="#versions">Explorar Modelos</a>
-				</div>
+    <main class="container" style="position:relative;z-index:10; opacity:0; visibility:hidden; transition: opacity 1.5s ease-in, visibility 1.5s ease-in;">
+        <section class="hero">
+            <div class="hero-left" style="z-index:2">
+                <h1>Astra Bot</h1>
+                <p class="hero-subtitle"></p>
+                <div class="hero-cta" style="margin-top:24px">
+                    <button class="botao-comprar" id="buy-now" style="width:auto">Comprar Agora</button>
+                    <a class="btn ghost" href="#versions">Explorar Modelos</a>
+                </div>
 
-				<div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
-					<span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">🎤 Controle por voz</span>
-					<span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">😊 Expressões emocionais</span>
-					<span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">📱 Bluetooth 5.4</span>
-				</div>
-			</div>
+                <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+                    <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">🎤 Controle por voz</span>
+                    <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">😊 Expressões emocionais</span>
+                    <span style="background:rgba(139,59,255,0.15);padding:8px 14px;border-radius:12px;font-size:13px;border:1px solid rgba(139,59,255,0.3)">📱 Wifi</span>
+                </div>
+            </div>
 
-			<div class="hero-right">
-				<div class="astra-img-box">
+            <div class="hero-right">
+                <div class="astra-img-box">
          <img src="Astra.jpg" alt="Astra Bot">
-				</div>
-			</div>
-		</section>
+                </div>
+            </div>
+        </section>
 
-		<section id="versions">
-			<h2 class="section-title">Escolhe o Teu Astra</h2>
-			<p class="section-subtitle">Três gerações de inovação. Cada uma projetada para um estilo de vida diferente. Encontra a que se encaixa perfeitamente em ti.</p>
+        <section id="versions">
+            <h2 class="section-title">Escolhe o Teu Astra</h2>
+            <p class="section-subtitle">Três gerações de inovação. Cada uma projetada para um estilo de vida diferente. Encontra a que se encaixa perfeitamente em ti.</p>
 
-			<div class="cards">
-				
-				<article class="modelo-card normal">
-					<span class="tag essencial">Essencial</span>
-					<div class="astra-img-box">
+            <div class="cards">
+                
+                <article class="modelo-card normal">
+                    <span class="tag essencial">Essencial</span>
+                    <div class="astra-img-box">
            <img src="Astra.jpg" alt="Astra Bot">
           </div>
-					<h3>Astra – Normal</h3>
-					<p class="modelo-descricao">O primeiro passo para uma amizade com IA. Perfeito para explorar e aprender.</p>
-					
-					<div class="modelo-specs">
-						<div>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(8GB)</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">ReSpeaker Mic Array</span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">microSDXC 64GB</span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Tela HDMI IPS 4.0"</span></span>
-						</div>
-					</div>
+                    <h3>Astra – Normal</h3>
+                    <p class="modelo-descricao">O primeiro passo para uma amizade com IA. Perfeito para explorar e aprender.</p>
+                    
+                    <div class="modelo-specs">
+                        <div>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(8GB)</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">ReSpeaker Mic Array</span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">microSDXC 64GB</span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Tela HDMI IPS 4.0"</span></span>
+                        </div>
+                    </div>
 
-					<p class="modelo-recursos">Expressões básicas • Conversas naturais • Suporte 24/7</p>
+                    <p class="modelo-recursos">Expressões básicas • Conversas naturais • Suporte 24/7</p>
 
-					<div class="modelo-footer">
-						<span class="preco">299€</span>
-						<button class="botao-comprar">Comprar Agora</button>
-						<button class="multicolor-button" onclick="abrirModelo3D()">
+                    <div class="modelo-footer">
+                        <span class="preco">299€</span>
+                        <button class="botao-comprar1">Comprar Agora</button>
+                        <button class="botao-comprar" onclick="abrirModelo3D()">
                             Ver Modelo 3D
                         </button>
 
-						<button class="botao-specs-ghost" onclick="showDetails(1)">Ver Especificações</button>
-					</div>
-				</article>
-				
-				<article class="modelo-card pro recomendado">
-					<span class="tag recomendado">Recomendado</span>
-					<div class="astra-img-box">
+                        <button class="botao-specs-ghost" onclick="showDetails(1)">Ver Especificações</button>
+                    </div>
+                </article>
+                
+                <article class="modelo-card pro recomendado">
+                    <span class="tag recomendado">Recomendado</span>
+                    <div class="astra-img-box">
            <img src="Astra.jpg" alt="Astra Bot">
-					</div>
-					<h3>Astra – Pro</h3>
-					<p class="modelo-descricao">O equilíbrio perfeito entre performance e emoção. A escolha da maioria.</p>
-					
-					<div class="modelo-specs">
-						<div>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(16GB)</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Waveshare 5" <span class="spec-subtext">HDMI LCD (800x480)</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">ReSpeaker 6-Mic</span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">SanDisk Extreme PRO 128 GB <span class="spec-subtext">cartão microSDXC</span></span></span>
-						</div>
-					</div>
+                    </div>
+                    <h3>Astra – Pro</h3>
+                    <p class="modelo-descricao">O equilíbrio perfeito entre performance e emoção. A escolha da maioria.</p>
+                    
+                    <div class="modelo-specs">
+                        <div>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(16GB)</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Waveshare 5" <span class="spec-subtext">HDMI LCD (800x480)</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">ReSpeaker 6-Mic</span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">SanDisk Extreme PRO 128 GB <span class="spec-subtext">cartão microSDXC</span></span></span>
+                        </div>
+                    </div>
 
-					<p class="modelo-recursos">IA emocional avançada • Pesquisa integrada • Aprendizado contínuo</p>
+                    <p class="modelo-recursos">IA emocional avançada • Pesquisa integrada • Aprendizado contínuo</p>
 
-					<div class="modelo-footer">
-						<span class="preco">599€</span>
-						<button class="botao-comprar">Comprar Agora</button>
-						<button class="botao-specs-ghost" onclick="showDetails(2)">Ver Especificações</button>
-					</div>
-				</article>
-				
-				<article class="modelo-card max">
-					<span class="tag premium">Premium</span>
-					<div class="astra-img-box">
+                    <div class="modelo-footer">
+                        <span class="preco">599€</span>
+                        <button class="botao-comprar1">Comprar Agora</button>
+                        <button class="botao-comprar" onclick="abrirModelo3D()">
+                            Ver Modelo 3D
+                        </button>
+                        <button class="botao-specs-ghost" onclick="showDetails(2)">Ver Especificações</button>
+                    </div>
+                </article>
+                
+                <article class="modelo-card max">
+                    <span class="tag premium">Premium</span>
+                    <div class="astra-img-box">
            <img src="Astra.jpg" alt="Astra Bot">
           </div> 
-					<h3>Astra – Max</h3>
-					<p class="modelo-descricao">O topo da tecnologia. Para quem quer o melhor em tudo.</p>
-					
-					<div class="modelo-specs">
-						<div>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(16GB)</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">Waveshare 5.5" <span class="spec-subtext">HDMI AMOLED (1080x1920)</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">SanDisk Extreme PRO 512 GB <span class="spec-subtext">cartão microSDXC</span></span></span>
-							<span class="spec-item"><span class="check">✓</span> <span class="spec-text">miniDSP UMA-16</span></span>
-						</div>
-					</div>
+                    <h3>Astra – Max</h3>
+                    <p class="modelo-descricao">O topo da tecnologia. Para quem quer o melhor em tudo.</p>
+                    
+                    <div class="modelo-specs">
+                        <div>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Raspberry Pi 5 <span class="spec-subtext">(16GB)</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">Waveshare 5.5" <span class="spec-subtext">HDMI AMOLED (1080x1920)</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">SanDisk Extreme PRO 512 GB <span class="spec-subtext">cartão microSDXC</span></span></span>
+                            <span class="spec-item"><span class="check">✓</span> <span class="spec-text">miniDSP UMA-16</span></span>
+                        </div>
+                    </div>
 
-					<p class="modelo-recursos">Processamento local • Acesso web completo • Sensores ambientais</p>
+                    <p class="modelo-recursos">Processamento local • Acesso web completo • Sensores ambientais</p>
 
-					<div class="modelo-footer">
-						<span class="preco">999€</span>
-						<button class="botao-comprar">Comprar Agora</button>
-						<button class="botao-specs-ghost" onclick="showDetails(3)">Ver Especificações</button>
-					</div>
-				</article>
+                    <div class="modelo-footer">
+                        <span class="preco">999€</span>
+                        <button class="botao-comprar1">Comprar Agora</button>
+                        <button class="botao-comprar" onclick="abrirModelo3D()">
+                            Ver Modelo 3D
+                        </button>
+                        <button class="botao-specs-ghost" onclick="showDetails(3)">Ver Especificações</button>
+                    </div>
+                </article>
 
-			</div>
-			
-			<section class="features">
-				<h2>Porque o Astra é Diferente</h2>
-				<p>O Astra Bot não é apenas um robô. É um companheiro que aprende contigo, cresce contigo e se adapta ao teu estilo de vida.</p>
-				<div class="row">
-					<div class="feat-box">
-						<h3>😊 Expressões Genuínas</h3>
-						<p>O Astra reage às tuas conversas com emoções autênticas: alegria, curiosidade, foco, empatia. Cada interação sente-se real.</p>
-					</div>
-					<div class="feat-box">
-						<h3>🌐 Conectividade Total</h3>
-						<p>Ligação via Bluetooth permite que ele aceda a internet, faça pesquisas em tempo real e execute tarefas por comando de voz.</p>
-					</div>
-					<div class="feat-box">
-						<h3>🧠 IA que Aprende</h3>
-						<p>Uma inteligência criada para aprender contigo, adaptar respostas e tornar a interação cada vez mais natural e pessoal.</p>
-					</div>
-				</div>
-			</section>
+            </div>
+            
+            <section class="features">
+                <h2>Porque o Astra é Diferente</h2>
+                <p>O Astra Bot não é apenas um robô. É um companheiro que aprende contigo, cresce contigo e se adapta ao teu estilo de vida.</p>
+                <div class="row">
+                    <div class="feat-box">
+                        <h3>😊 Expressões Genuínas</h3>
+                        <p>O Astra reage às tuas conversas com emoções autênticas: alegria, curiosidade, foco, empatia. Cada interação sente-se real.</p>
+                    </div>
+                    <div class="feat-box">
+                        <h3>🌐 Conectividade Total</h3>
+                        <p>Ligação via Bluetooth permite que ele aceda a internet, faça pesquisas em tempo real e execute tarefas por comando de voz.</p>
+                    </div>
+                    <div class="feat-box">
+                        <h3>🧠 IA que Aprende</h3>
+                        <p>Uma inteligência criada para aprender contigo, adaptar respostas e tornar a interação cada vez mais natural e pessoal.</p>
+                    </div>
+                </div>
+            </section>
 
-			<section class="testimonials">
-				<h2 style="text-align:center;margin-top:0;font-size:32px;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">O Que Dizem Sobre o Astra</h2>
-				<div class="testimonials-grid">
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"Nunca pensei que um robô pudesse ser tão compreensivo. O Astra entende-me melhor do que esperava. É como ter um amigo sempre disponível."</p>
-						<div class="testimonial-author">Sofia Martins</div>
-						<div class="testimonial-role">Utilizadora desde Março 2024</div>
-					</div>
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"A qualidade das respostas é impressionante. O Astra Pro ajuda-me com trabalho todos os dias. Vale cada euro investido."</p>
-						<div class="testimonial-author">João Silva</div>
-						<div class="testimonial-role">Utilizador Pro desde Janeiro 2024</div>
-					</div>
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"Comprei o Max e não me arrependo. A autonomia de bateria é incrível e as expressões emocionais são muito realistas."</p>
-						<div class="testimonial-author">Maria Costa</div>
-						<div class="testimonial-role">Utilizadora Max desde Fevereiro 2024</div>
-					</div>
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"Recomendo o Astra a todos os meus amigos. É uma experiência única. Sinto que tenho um verdadeiro companheiro."</p>
-						<div class="testimonial-author">Pedro Oliveira</div>
-						<div class="testimonial-role">Utilizador desde Dezembro 2023</div>
-					</div>
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"A interação é tão natural que às vezes esqueço que estou a falar com um robô. Simplesmente incrível!"</p>
-						<div class="testimonial-author">Ana Ferreira</div>
-						<div class="testimonial-role">Utilizadora Pro desde Abril 2024</div>
-					</div>
-					<div class="testimonial">
-						<div class="testimonial-stars">★★★★★</div>
-						<p class="testimonial-text">"Melhor compra que fiz este ano. O Astra tornou-se parte da minha rotina diária. Não consigo imaginar a vida sem ele."</p>
-						<div class="testimonial-author">Ricardo Gomes</div>
-						<div class="testimonial-role">Utilizador Max desde Novembro 2023</div>
-					</div>
-				</div>
-			</section>
+            <section class="testimonials">
+                <h2 style="text-align:center;margin-top:0;font-size:32px;background:linear-gradient(90deg,#c14bff,#8b39ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">O Que Dizem Sobre o Astra</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Nunca pensei que um robô pudesse ser tão compreensivo. O Astra entende-me melhor do que esperava. É como ter um amigo sempre disponível."</p>
+                        <div class="testimonial-author">Sofia Martins</div>
+                        <div class="testimonial-role">Utilizadora desde Março 2024</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"A qualidade das respostas é impressionante. O Astra Pro ajuda-me com trabalho todos os dias. Vale cada euro investido."</p>
+                        <div class="testimonial-author">João Silva</div>
+                        <div class="testimonial-role">Utilizador Pro desde Janeiro 2024</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Comprei o Max e não me arrependo. A autonomia de bateria é incrível e as expressões emocionais são muito realistas."</p>
+                        <div class="testimonial-author">Maria Costa</div>
+                        <div class="testimonial-role">Utilizadora Max desde Fevereiro 2024</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Recomendo o Astra a todos os meus amigos. É uma experiência única. Sinto que tenho um verdadeiro companheiro."</p>
+                        <div class="testimonial-author">Pedro Oliveira</div>
+                        <div class="testimonial-role">Utilizador desde Dezembro 2023</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"A interação é tão natural que às vezes esqueço que estou a falar com um robô. Simplesmente incrível!"</p>
+                        <div class="testimonial-author">Ana Ferreira</div>
+                        <div class="testimonial-role">Utilizadora Pro desde Abril 2024</div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Melhor compra que fiz este ano. O Astra tornou-se parte da minha rotina diária. Não consigo imaginar a vida sem ele."</p>
+                        <div class="testimonial-author">Ricardo Gomes</div>
+                        <div class="testimonial-role">Utilizador Max desde Novembro 2023</div>
+                    </div>
+                </div>
+            </section>
 
-			<div class="table">
-				<h3 style="margin:0 0 16px;font-size:20px">Comparativo Detalhado</h3>
-				<table>
-					<thead>
-						<tr><th>Recurso</th><th class="tcenter">Normal</th><th class="tcenter">Pro</th><th class="tcenter">Max</th></tr>
-					</thead>
-					<tbody>
-						<tr><td>Processador</td><td class="tcenter">Raspberry Pi 5 (8GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td></tr>
-						<tr><td>Microfones</td><td class="tcenter">ReSpeaker v3.0</td><td class="tcenter">ReSpeaker 6-Mic</td><td class="tcenter">miniDSP UMA-16</td></tr>
-						<tr><td>Ecrã</td><td class="tcenter">HDMI IPS 4.0"</td><td class="tcenter">Waveshare 5 polegadas HDMI LCD (800x480)</td><td class="tcenter">Waveshare 5.5 polegadas HDMI AMOLED Display (1080x1920)</td></tr>
-						<tr><td>Armazenamento</td><td class="tcenter">microSDXC 64GB</td><td class="tcenter">SanDisk Extreme PRO 128 GB cartão microSDXC</td><td class="tcenter">SanDisk Extreme PRO 512 GB cartão microSDXC</td></tr>
-						<tr><td>Autonomia bateria portatil</td><td class="tcenter">5h</td><td class="tcenter">12h</td><td class="tcenter">17h</td></tr>
-						<tr><td>Expressões emocionais</td><td class="tcenter">Básicas</td><td class="tcenter">Avançadas</td><td class="tcenter">Premium</td></tr>
-						<tr><td>Suporte prioritário</td><td class="tcenter">✓</td><td class="tcenter">✓✓</td><td class="tcenter">✓✓✓</td></tr>
-					</tbody>
-				</table>
-			</div>
+            <div class="table">
+                <h3 style="margin:0 0 16px;font-size:20px">Comparativo Detalhado</h3>
+                <table>
+                    <thead>
+                        <tr><th>Recurso</th><th class="tcenter">Normal</th><th class="tcenter">Pro</th><th class="tcenter">Max</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Processador</td><td class="tcenter">Raspberry Pi 5 (8GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td><td class="tcenter">Raspberry Pi 5 (16GB)</td></tr>
+                        <tr><td>Microfones</td><td class="tcenter">ReSpeaker v3.0</td><td class="tcenter">ReSpeaker 6-Mic</td><td class="tcenter">miniDSP UMA-16</td></tr>
+                        <tr><td>Ecrã</td><td class="tcenter">HDMI IPS 4.0"</td><td class="tcenter">Waveshare 5 polegadas HDMI LCD (800x480)</td><td class="tcenter">Waveshare 5.5 polegadas HDMI AMOLED Display (1080x1920)</td></tr>
+                        <tr><td>Armazenamento</td><td class="tcenter">microSDXC 64GB</td><td class="tcenter">SanDisk Extreme PRO 128 GB cartão microSDXC</td><td class="tcenter">SanDisk Extreme PRO 512 GB cartão microSDXC</td></tr>
+                        <tr><td>Autonomia bateria portatil</td><td class="tcenter">5h</td><td class="tcenter">12h</td><td class="tcenter">17h</td></tr>
+                        <tr><td>Expressões emocionais</td><td class="tcenter">Básicas</td><td class="tcenter">Avançadas</td><td class="tcenter">Premium</td></tr>
+                        <tr><td>Suporte prioritário</td><td class="tcenter">✓</td><td class="tcenter">✓✓</td><td class="tcenter">✓✓✓</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-			<div class="cta-box" style="margin-top:40px">
-				<div>
-					<strong>Pronto para trazer o Astra para casa?</strong>
-					<div style="color:var(--muted);margin-top:6px;font-size:14px">Inscreve-te para receber novidades, ofertas exclusivas e acesso antecipado a novos modelos.</div>
-				</div>
+            <div class="cta-box" style="margin-top:40px">
+                <div>
+                    <strong>Pronto para trazer o Astra para casa?</strong>
+                    <div style="color:var(--muted);margin-top:6px;font-size:14px">Inscreve-te para receber novidades, ofertas exclusivas e acesso antecipado a novos modelos.</div>
+                </div>
 
-				<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-					<input id="email" type="email" placeholder="o teu email" style="padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:white;min-width:220px;font-size:14px">
-					<button class="btn" onclick="subscribe()" style="white-space:nowrap">Inscrever-me</button>
-				</div>
-			</div>
-		</section>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                    <input id="email" type="email" placeholder="o teu email" style="padding:12px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:white;min-width:220px;font-size:14px">
+                    <button class="btn" onclick="subscribe()" style="white-space:nowrap">Inscrever-me</button>
+                </div>
+            </div>
+        </section>
 
-		<footer>
-			<div style="margin-bottom:16px">© <span id="year"></span> Astra Bot · Transformando a forma como interages com tecnologia</div>
-			<div style="color:rgba(255,255,255,0.4);font-size:13px">Contacto: hello@astrabot.example | Suporte 24/7 disponível</div>
-		</footer>
+        <footer>
+            <div style="margin-bottom:16px">© <span id="year"></span> Astra Bot · Transformando a forma como interages com tecnologia</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:13px">Contacto: hello@astrabot.example | Suporte 24/7 disponível</div>
+        </footer>
 
-	</main>
+    </main>
 
-	<div id="modal">
-		<div class="modal-card">
-			<h2 id="modal-title" style="margin-top:0"></h2>
-			<p id="modal-body"></p>
-			<button class="btn" onclick="closeModal()" style="margin-top:20px">Fechar</button>
-		</div>
-	</div>
+    <div id="modal">
+        <div class="modal-card">
+            <h2 id="modal-title" style="margin-top:0"></h2>
+            <p id="modal-body"></p>
+            <button class="btn" onclick="closeModal()" style="margin-top:20px">Fechar</button>
+        </div>
+    </div>
 
 <script>
-	// ============================================
-	// Lógica da Tela de Introdução e Transição
-	// ============================================
-	const introScreen = document.getElementById('intro-screen');
-	const startButton = document.getElementById('start-journey-btn');
-	const mainContent = document.querySelector('main.container');
-	
-	// Variáveis para a animação do texto do Hero
-	const heroSub = document.querySelector('.hero-subtitle');
-	const txt = "O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.";
+    // ============================================
+    // Lógica da Tela de Introdução e Transição
+    // ============================================
+    const introScreen = document.getElementById('intro-screen');
+    const startButton = document.getElementById('start-journey-btn');
+    const mainContent = document.querySelector('main.container');
+    
+    // Variáveis para a animação do texto do Hero
+    const heroSub = document.querySelector('.hero-subtitle');
+    const txt = "O companheiro de IA que realmente te compreende. Expressões emocionais genuínas, respostas inteligentes e uma conexão que cresce cada dia.";
 
-	function startTypewriter() {
-		heroSub.textContent = ''; 
-		let i=0;
-		
-		(function type(){ 
-			if(i<=txt.length){ 
-				heroSub.textContent = txt.slice(0,i); 
-				i++; 
-				setTimeout(type,10); 
-			}
-		})();
-	}
-	
-	function hideIntroScreen() {
-			// 1. Esconde a tela de introdução
-			introScreen.classList.add('hidden');
-			
-			// 2. Torna o conteúdo principal visível
-			mainContent.style.opacity = '1';
-			mainContent.style.visibility = 'visible';
-			
-			// 3. Inicia a animação de escrita no conteúdo principal após o fade
-			setTimeout(startTypewriter, 1500); // 1.5s (Igual ao CSS transition)
-	}
+    function startTypewriter() {
+        heroSub.textContent = ''; 
+        let i=0;
+        
+        (function type(){ 
+            if(i<=txt.length){ 
+                heroSub.textContent = txt.slice(0,i); 
+                i++; 
+                setTimeout(type,10); 
+            }
+        })();
+    }
+    
+    function hideIntroScreen() {
+            // 1. Esconde a tela de introdução
+            introScreen.classList.add('hidden');
+            
+            // 2. Torna o conteúdo principal visível
+            mainContent.style.opacity = '1';
+            mainContent.style.visibility = 'visible';
+            
+            // 3. Inicia a animação de escrita no conteúdo principal após o fade
+            setTimeout(startTypewriter, 1500); // 1.5s (Igual ao CSS transition)
+    }
 
-	// Ação ao clicar no botão da Landing Page
-	startButton.addEventListener('click', hideIntroScreen);
-	
-	// ============================================
-	// Lógica dos Cards e Modal (NOVO)
-	// ============================================
+    // Ação ao clicar no botão da Landing Page
+    startButton.addEventListener('click', hideIntroScreen);
+    
+    // ============================================
+    // Lógica dos Cards e Modal (NOVO)
+    // ============================================
 
-	const specsData = {
-		1: {
-			title: "Astra – Normal (Essencial)",
-			details: "O modelo de entrada perfeito. Inclui o Raspberry Pi 5 (8GB) para um desempenho sólido, um ecrã HDMI IPS de 4.0 polegadas para expressões visuais, e o ReSpeaker Mic Array para captação de voz básica. Ideal para interações diárias e aprendizado. Armazenamento: 64GB microSDXC."
-		},
-		2: {
-			title: "Astra – Pro (Recomendado)",
-			details: "O nosso modelo mais popular. Equipado com Raspberry Pi 5 (16GB), ecrã Waveshare 5 polegadas HDMI LCD, e o microfone ReSpeaker 6-Mic para captação de áudio de longo alcance. Possui um armazenamento mais rápido e maior (SanDisk Extreme PRO 128 GB microSDXC) para IA emocional avançada e pesquisa integrada."
-		},
-		3: {
-			title: "Astra – Max (Premium)",
-			details: "A potência máxima. Utiliza o Raspberry Pi 5 (16GB) para processamento local intenso, um deslumbrante ecrã AMOLED Waveshare de 5.5 polegadas (1080x1920) e o microfone de matriz miniDSP UMA-16 de qualidade profissional. Inclui 512 GB de armazenamento SanDisk Extreme PRO para acesso web completo e processamento de sensores ambientais avançado."
-		}
-	};
+    const specsData = {
+        1: {
+            title: "Astra – Normal (Essencial)",
+            details: "O modelo de entrada perfeito. Inclui o Raspberry Pi 5 (8GB) para um desempenho sólido, um ecrã HDMI IPS de 4.0 polegadas para expressões visuais, e o ReSpeaker Mic Array para captação de voz básica. Ideal para interações diárias e aprendizado. Armazenamento: 64GB microSDXC."
+        },
+        2: {
+            title: "Astra – Pro (Recomendado)",
+            details: "O nosso modelo mais popular. Equipado com Raspberry Pi 5 (16GB), ecrã Waveshare 5 polegadas HDMI LCD, e o microfone ReSpeaker 6-Mic para captação de áudio de longo alcance. Possui um armazenamento mais rápido e maior (SanDisk Extreme PRO 128 GB microSDXC) para IA emocional avançada e pesquisa integrada."
+        },
+        3: {
+            title: "Astra – Max (Premium)",
+            details: "A potência máxima. Utiliza o Raspberry Pi 5 (16GB) para processamento local intenso, um deslumbrante ecrã AMOLED Waveshare de 5.5 polegadas (1080x1920) e o microfone de matriz miniDSP UMA-16 de qualidade profissional. Inclui 512 GB de armazenamento SanDisk Extreme PRO para acesso web completo e processamento de sensores ambientais avançado."
+        }
+    };
 
-	function showDetails(id) {
-		const data = specsData[id];
-		if (data) {
-			document.getElementById('modal-title').textContent = data.title;
-			document.getElementById('modal-body').textContent = data.details;
-			document.getElementById('modal').style.display = 'flex';
-		}
-	}
+    function showDetails(id) {
+        const data = specsData[id];
+        if (data) {
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-body').textContent = data.details;
+            document.getElementById('modal').style.display = 'flex';
+        }
+    }
 
-	function closeModal() {
-		document.getElementById('modal').style.display = 'none';
-	}
-	
-	// Define o ano atual no footer
-	document.getElementById('year').textContent = new Date().getFullYear();
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+    }
+    
+    // Define o ano atual no footer
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-	// ============================================
-	// VFX Canvas - Sistema de Partículas (MANTIDO)
-	// ============================================
-	
-	const canvas = document.getElementById('vfx-canvas');
-	const ctx = canvas.getContext('2d');
-	
-	// Redimensionar canvas
-	function resizeCanvas() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-	}
-	resizeCanvas();
-	window.addEventListener('resize', resizeCanvas);
-	
-	// Classe de Partícula
-	class Particle {
-		constructor(x, y) {
-			this.x = x;
-			this.y = y;
-			this.vx = (Math.random() - 0.5) * 0.5;
-			this.vy = (Math.random() - 0.5) * 0.5;
-			this.radius = Math.random() * 2 + 1;
-			this.color = `hsl(${Math.random() * 360}, 70%, 70%)`;
-			this.opacity = Math.random() * 0.8 + 0.2;
-		}
+    // ============================================
+    // VFX Canvas - Sistema de Partículas (MANTIDO)
+    // ============================================
+    
+    const canvas = document.getElementById('vfx-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Redimensionar canvas
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Classe de Partícula
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 2 + 1;
+            this.color = `hsl(${Math.random() * 360}, 70%, 70%)`;
+            this.opacity = Math.random() * 0.8 + 0.2;
+        }
 
-		draw() {
-			ctx.save();
-			ctx.globalAlpha = this.opacity;
-			ctx.beginPath();
-			ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-			ctx.fillStyle = this.color;
-			ctx.fill();
-			ctx.restore();
-		}
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.opacity;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
 
-		update() {
-			this.x += this.vx;
-			this.y += this.vy;
-			
-			// Mantém as partículas dentro do ecrã
-			if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-			if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            // Mantém as partículas dentro do ecrã
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
 
-			this.draw();
-		}
-	}
-	
-	let particles = [];
-	const numberOfParticles = 80;
+            this.draw();
+        }
+    }
+    
+    let particles = [];
+    const numberOfParticles = 80;
 
-	function init() {
-		particles = [];
-		for (let i = 0; i < numberOfParticles; i++) {
-			const x = Math.random() * canvas.width;
-			const y = Math.random() * canvas.height;
-			particles.push(new Particle(x, y));
-		}
-	}
+    function init() {
+        particles = [];
+        for (let i = 0; i < numberOfParticles; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            particles.push(new Particle(x, y));
+        }
+    }
 
-	function connect() {
-		let opacityValue = 1;
-		for (let a = 0; a < particles.length; a++) {
-			for (let b = a; b < particles.length; b++) {
-				const dx = particles[a].x - particles[b].x;
-				const dy = particles[a].y - particles[b].y;
-				const distance = Math.sqrt(dx * dx + dy * dy);
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particles.length; a++) {
+            for (let b = a; b < particles.length; b++) {
+                const dx = particles[a].x - particles[b].x;
+                const dy = particles[a].y - particles[b].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
 
-				if (distance < 100) {
-					opacityValue = 1 - (distance / 100);
-					ctx.strokeStyle = `rgba(139, 59, 255, ${opacityValue})`;
-					ctx.lineWidth = 1;
-					ctx.beginPath();
-					ctx.moveTo(particles[a].x, particles[a].y);
-					ctx.lineTo(particles[b].x, particles[b].y);
-					ctx.stroke();
-				}
-			}
-		}
-	}
+                if (distance < 100) {
+                    opacityValue = 1 - (distance / 100);
+                    ctx.strokeStyle = `rgba(139, 59, 255, ${opacityValue})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
 
-	function animate() {
-		requestAnimationFrame(animate);
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-		for (let i = 0; i < particles.length; i++) {
-			particles[i].update();
-		}
-		
-		connect();
-	}
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+        
+        connect();
+    }
 
-	init();
-	animate();
+    init();
+    animate();
 
-	// Função de Subscrição (Placeholder)
-	function subscribe() {
-		const emailInput = document.getElementById('email');
-		alert(`Obrigado por subscrever com: ${emailInput.value}!`);
-		emailInput.value = '';
-	}
+    // Função de Subscrição (Placeholder)
+    function subscribe() {
+        const emailInput = document.getElementById('email');
+        alert(`Obrigado por subscrever com: ${emailInput.value}!`);
+        emailInput.value = '';
+    }
 </script>
 <!-- IMPORTAÇÃO DO MODEL-VIEWER -->
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
 /* ===========================================================
-   ULTRA PREMIUM STUDIO CONFIGURATOR — PREMIUM EDITION (2025)
+   ULTRA PREMIUM STUDIO CONFIGURATOR — SIGNATURE EDITION (2025)
    =========================================================== */
 
+:root{
+  --panel-bg-top: rgba(15,15,20,0.92);
+  --panel-bg-bottom: rgba(0,0,0,0.96);
+  --accent-outline: rgba(255,255,255,0.15);
+  --glass-blur-visible: 38px;
+  --glass-blur-hidden: 28px;
+}
+
+/* painel (overlay/dialog) */
 #colorPanel {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  top: 0;
-  left: 0;
-
+  inset: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  background: radial-gradient(circle at center,
-    rgba(10,10,15,0.88) 0%,
-    rgba(0,0,0,0.95) 70%
-  );
-  backdrop-filter: blur(25px) saturate(200%);
-
+  justify-content: center;
+  background:
+    radial-gradient(circle at center,
+      var(--panel-bg-top) 0%,
+      var(--panel-bg-bottom) 65%
+    );
+  backdrop-filter: blur(var(--glass-blur-hidden)) saturate(250%);
+  transition: opacity .45s ease, backdrop-filter .45s ease;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .45s ease;
-
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow:
+    inset 0 0 80px rgba(255,255,255,0.05),
+    0 0 60px rgba(0,0,0,0.8);
   z-index: 99999;
 }
 
-/* Painel ativo */
+/* Visível */
 #colorPanel.mostrar {
   opacity: 1;
   pointer-events: all;
+  backdrop-filter: blur(var(--glass-blur-visible)) saturate(300%);
 }
 
-/* Partículas Cinemáticas */
-#particles-bg {
-  position: absolute;
+/* Conteúdo central (para clique fora funcionar) */
+#panelContent{
+  width: min(920px, 95vw);
+  max-height: 90vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.6);
+  outline: none; /* foco gerido por JS */
+}
+
+/* HEADER com titulo e close (acessível) */
+#panelHeader{
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+#panelTitle{
+  color:#fff;
+  font-weight:700;
+  font-size:20px;
+  letter-spacing:0.6px;
+}
+#closePanel{
+  padding:10px 16px;
+  font-size:16px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:transparent;
+  color:#fff;
+  cursor:pointer;
 }
 
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(255,255,255,0.25);
-  border-radius: 50%;
-  filter: blur(2px);
-  animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(100vh); }
-  to   { transform: translateY(-10vh); }
-}
-
-/* Modelo com efeito hero */
-model-viewer {
-  width: 700px;
-  height: 700px;
+/* loader do model-viewer */
+#viewerWrap{
+  width: 720px;
+  height: 720px;
   max-width: 90vw;
-  max-height: 75vh;
-
-  filter: drop-shadow(0 0 35px rgba(255,255,255,0.15));
+  max-height: 65vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+#viewer {
+  width:100%;
+  height:100%;
+  filter: drop-shadow(0 0 45px rgba(255,255,255,0.18));
   animation: riseIn .7s ease forwards;
   opacity: 0;
-  transform: translateY(30px) scale(0.9);
+  transform: translateY(40px) scale(.88);
+  transition: filter .45s ease, opacity .45s ease, transform .45s ease;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+  overflow: hidden;
 }
+#viewer[data-loaded="true"] { opacity: 1; transform: translateY(0) scale(1); }
 
 @keyframes riseIn {
   to {
@@ -999,166 +1062,427 @@ model-viewer {
   }
 }
 
-/* ======================
-       PALETA DE CORES
-   ====================== */
+/* Loader simples */
+#viewerLoader{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.5));
+  color:white;
+  font-weight:600;
+  z-index:22;
+  border-radius:12px;
+}
+
+/* ===========================================================
+   PALETA DE CORES PROFISSIONAL
+   =========================================================== */
 .color-bar {
-  margin-top: 35px;
+  margin-top: 4px;
   display: flex;
-  gap: 22px;
+  gap: 14px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items:center;
 }
 
 .color-btn {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.5);
-
-  cursor: pointer;
-  transition: .25s ease;
-
-  box-shadow:
-    0 0 18px rgba(255,255,255,0.25),
-    inset 0 0 15px rgba(255,255,255,0.2);
-
+  border: 2px solid rgba(255,255,255,0.45);
   position: relative;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow:
+    inset 0 -6px 12px rgba(0,0,0,0.35),
+    0 0 14px rgba(255,255,255,0.12),
+    inset 0 0 12px rgba(255,255,255,0.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.color-btn::after {
+/* anel neon quando activo - usa currentColor */
+.color-btn.active::after {
   content: "";
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   border-radius: 50%;
-  box-shadow: 0 0 0px transparent;
-  transition: .35s ease;
-}
-
-/* Hover com neon */
-.color-btn:hover {
-  transform: scale(1.22);
   box-shadow:
-    0 0 25px currentColor,
-    inset 0 0 30px currentColor;
+    0 0 20px currentColor,
+    0 0 46px currentColor inset;
 }
 
-/* Estado ativo com anel neon */
-.color-btn.active::after {
-  box-shadow: 0 0 22px currentColor, 0 0 45px currentColor inset;
+/* outline de acessibilidade quando focado via teclado */
+.color-btn:focus {
+  outline: 3px solid rgba(255,255,255,0.12);
+  transform: scale(1.08);
 }
 
-/* ======================
-     BOTÃO FECHAR
-   ====================== */
-#closePanel {
-  margin-top: 35px;
-  padding: 16px 40px;
-  font-size: 20px;
-  font-weight: 600;
+/* hover */
+.color-btn:hover { transform: scale(1.18); }
 
-  background: linear-gradient(to bottom right, #1a1a1a, #2c2c2c);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
-  color: white;
-  cursor: pointer;
-
-  transition: 0.3s ease;
+/* label de cor atual */
+#colorLabel{
+  margin-top:10px;
+  color:#eaeaea;
+  font-weight:600;
+  font-size:14px;
+  min-height:20px;
+  text-align:center;
 }
 
-#closePanel:hover {
-  transform: scale(1.08) translateY(-3px);
-  background: linear-gradient(to bottom right, #292929, #3c3c3c);
-  box-shadow: 0 8px 25px rgba(255,255,255,0.18);
+/* reset button */
+#resetColor{
+  margin-top: 8px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background: transparent;
+  color: #fff;
+  cursor:pointer;
+}
+
+/* ===========================================================
+   PARTICULAS (optimizado)
+   =========================================================== */
+#particles-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events:none;
+}
+
+/* usamos poucas partículas e anim-play-state toggle via JS */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: floatUp linear infinite;
+  animation-play-state: paused; /* ativado apenas quando painel visível */
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity:0; }
+  10%  { opacity: 0.12; }
+  80%  { opacity: 0.12; }
+  to   { transform: translateY(-20vh); opacity:0; }
+}
+
+/* pequenos ajustes responsivos */
+@media (max-width:720px){
+  #viewerWrap{ max-height:55vh; }
+  .color-btn{ width:48px; height:48px; }
 }
 </style>
 
-<!-- ======================
-       POPUP / PAINEL
-     ====================== -->
-<div id="colorPanel">
+<!-- ===========================================================
+      POPUP / PAINEL 3D
+     =========================================================== -->
+<div id="colorPanel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" aria-hidden="true">
 
     <!-- Partículas de fundo -->
-    <div id="particles-bg"></div>
+    <div id="particles-bg" aria-hidden="true"></div>
 
-    <!-- Modelo 3D -->
-    <model-viewer id="viewer" src="model.glb" auto-rotate camera-controls></model-viewer>
+    <!-- Conteúdo do painel (central) -->
+    <div id="panelContent" tabindex="-1">
+      <div id="panelHeader">
+        <div id="panelTitle">Visualizador 3D — Configurador</div>
+        <button id="closePanel" aria-label="Fechar painel (Esc)" title="Fechar">✕</button>
+      </div>
 
-    <!-- Paleta -->
-    <div class="color-bar">
-      <div class="color-btn" style="background:red" data-hue="0"></div>
-      <div class="color-btn" style="background:orange" data-hue="30"></div>
-      <div class="color-btn" style="background:yellow" data-hue="60"></div>
-      <div class="color-btn" style="background:lime" data-hue="120"></div>
-      <div class="color-btn" style="background:cyan" data-hue="180"></div>
-      <div class="color-btn" style="background:blue" data-hue="240"></div>
-      <div class="color-btn" style="background:magenta" data-hue="300"></div>
-      <div class="color-btn" style="background:white" data-hue="reset"></div>
+      <!-- modelo + loader -->
+      <div id="viewerWrap" aria-live="polite">
+        <model-viewer id="viewer"
+          src="model.glb"
+          auto-rotate
+          camera-controls
+          exposure="1"
+          shadow-intensity="1"
+          style="background:transparent"
+          ></model-viewer>
+
+        <div id="viewerLoader" role="status" aria-hidden="false">A carregar modelo…</div>
+      </div>
+
+      <!-- Paleta de cores -->
+      <div class="color-bar" role="list" aria-label="Paleta de cores" id="colorBar">
+        <button class="color-btn" style="background:linear-gradient(45deg, #ff3b3b, #ff6b6b);" data-hue="0" data-name="Vermelho" title="Vermelho" aria-label="Vermelho" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#ff8a00,#ffb14d);" data-hue="30" data-name="Laranja" title="Laranja" aria-label="Laranja" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#ffd600,#fff28a);" data-hue="60" data-name="Amarelo" title="Amarelo" aria-label="Amarelo" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#9fff4d,#a8ff8a);" data-hue="120" data-name="Verde" title="Verde" aria-label="Verde" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#4deeff,#8af7ff);" data-hue="180" data-name="Ciano" title="Ciano" aria-label="Ciano" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#4d73ff,#7aa0ff);" data-hue="240" data-name="Azul" title="Azul" aria-label="Azul" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#d24dff,#ff9eff);" data-hue="300" data-name="Magenta" title="Magenta" aria-label="Magenta" role="listitem"></button>
+        <button class="color-btn" style="background:linear-gradient(45deg,#ffffff,#e5e5e5); border:2px solid rgba(0,0,0,0.08);" data-hue="reset" data-name="Padrão" title="Padrão (reset)" aria-label="Reset color" role="listitem"></button>
+      </div>
+
+      <!-- label + reset -->
+      <div id="colorLabel" aria-live="polite">Cor atual: —</div>
+      <button id="resetColor" title="Resetar cor para padrão">Resetar para padrão</button>
     </div>
-
-    <button id="closePanel">Fechar</button>
 </div>
 
 <script>
+/* ======================
+   Elementos
+   ====================== */
 const panel = document.getElementById("colorPanel");
+const panelContent = document.getElementById("panelContent");
 const viewer = document.getElementById("viewer");
+const loader = document.getElementById("viewerLoader");
+const colorButtons = Array.from(document.querySelectorAll(".color-btn"));
+const colorLabel = document.getElementById("colorLabel");
+const resetBtn = document.getElementById("resetColor");
+const particlesContainer = document.getElementById("particles-bg");
+
+let lastFocusedElement = null;
+const LOCAL_KEY = "u_premium_config_hue";
 
 /* ======================
-   Abrir painel
+   Abrir painel (método público)
    ====================== */
 function abrirModelo3D() {
+  lastFocusedElement = document.activeElement;
   panel.classList.add("mostrar");
+  panel.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
+
+  // ativar partículas (animação)
+  toggleParticles(true);
+
+  // foco no painel para acessibilidade
+  setTimeout(()=> panelContent.focus(), 70);
+
+  // aplica cor guardada (se houver)
+  applySavedColor();
 }
 
 /* ======================
    Fechar painel
    ====================== */
-document.getElementById("closePanel")
-.addEventListener("click", () => {
+function fecharModelo3D() {
   panel.classList.remove("mostrar");
+  panel.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "auto";
+
+  // desativa partículas
+  toggleParticles(false);
+
+  // devolve foco
+  if(lastFocusedElement) lastFocusedElement.focus();
+}
+
+/* fechar via botão */
+document.getElementById("closePanel").addEventListener("click", fecharModelo3D);
+
+/* fechar ao clicar fora do content (overlay) */
+panel.addEventListener("pointerdown", (e) => {
+  // se o clique foi no overlay (panel) e não dentro do content
+  if(!panelContent.contains(e.target)) {
+    fecharModelo3D();
+  }
+});
+
+/* fechar com ESC e navegação geral */
+document.addEventListener("keydown", (e) => {
+  // ESC fecha
+  if(e.key === "Escape" && panel.classList.contains("mostrar")) {
+    e.preventDefault();
+    fecharModelo3D();
+  }
+
+  // Navegação por teclas na paleta (quando painel aberto)
+  if(panel.classList.contains("mostrar")) {
+    const focused = document.activeElement;
+    const idx = colorButtons.indexOf(focused);
+    // se um dos botões estiver focado, aceitar setas e enter
+    if(idx !== -1) {
+      if(e.key === "ArrowRight") {
+        e.preventDefault();
+        const next = colorButtons[(idx + 1) % colorButtons.length];
+        next.focus();
+      } else if(e.key === "ArrowLeft") {
+        e.preventDefault();
+        const prev = colorButtons[(idx - 1 + colorButtons.length) % colorButtons.length];
+        prev.focus();
+      } else if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        focused.click();
+      }
+    }
+
+    // Tab trap: se Shift+Tab fora do primeiro, ou Tab fora do last, manter dentro
+    if(e.key === "Tab") {
+      trapFocus(e);
+    }
+  }
 });
 
 /* ======================
-   Sistema de cor melhorado
+   Focus trap (simples)
    ====================== */
-document.querySelectorAll(".color-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    
-    // Atualiza seleção visual
-    document.querySelectorAll(".color-btn")
-      .forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+function trapFocus(e) {
+  const focusables = panelContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  const focusArray = Array.from(focusables).filter(el => !el.hasAttribute("disabled"));
+  if(focusArray.length === 0) return;
+  const first = focusArray[0];
+  const last = focusArray[focusArray.length -1];
 
-    // Aplica cor com suavização
-    const hue = btn.dataset.hue;
-    viewer.style.transition = "filter .4s ease";
-    viewer.style.filter =
-      hue === "reset"
-      ? "hue-rotate(0deg)"
-      : `hue-rotate(${hue}deg)`;
-  });
-});
-
-/* ======================
-   Partículas Cinemáticas
-   ====================== */
-function criarParticulas() {
-  const container = document.getElementById("particles-bg");
-
-  for (let i = 0; i < 40; i++) {
-    const p = document.createElement("div");
-    p.classList.add("particle");
-
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = (6 + Math.random() * 12) + "s";
-    p.style.opacity = 0.1 + Math.random() * 0.4;
-
-    container.appendChild(p);
+  if(e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if(!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
   }
 }
-criarParticulas();
+
+/* ======================
+   Sistema de cor + keyboard + armazenamento
+   ====================== */
+function setViewerHue(hue, name) {
+  // guarda preferência
+  if(hue === "reset") {
+    localStorage.removeItem(LOCAL_KEY);
+    viewer.style.filter = "hue-rotate(0deg)";
+    viewer.removeAttribute("data-hue");
+    colorLabel.textContent = `Cor atual: Padrão`;
+  } else {
+    localStorage.setItem(LOCAL_KEY, hue);
+    viewer.style.filter = `hue-rotate(${hue}deg)`;
+    viewer.setAttribute("data-hue", hue);
+    colorLabel.textContent = `Cor atual: ${name || hue} (hue ${hue}°)`;
+  }
+  // transição suave
+  viewer.style.transition = "filter .45s ease";
+}
+
+/* aplica seleção visual e aria */
+function activateButton(btn) {
+  colorButtons.forEach(b => {
+    b.classList.remove("active");
+    b.setAttribute("aria-pressed", "false");
+    b.style.removeProperty("color");
+  });
+  btn.classList.add("active");
+  btn.setAttribute("aria-pressed", "true");
+  // usa computed background to set currentColor for glow
+  btn.style.color = getComputedStyle(btn).backgroundColor || "#fff";
+}
+
+/* click e keyboard handlers para cada botão */
+colorButtons.forEach((btn, idx) => {
+  btn.addEventListener("click", () => {
+    activateButton(btn);
+    const hue = btn.dataset.hue;
+    const name = btn.dataset.name || `Hue ${hue}`;
+    setViewerHue(hue, name);
+  });
+
+  // permitir foco via teclado
+  btn.tabIndex = 0;
+});
+
+/* reset */
+resetBtn.addEventListener("click", () => {
+  // encontrar botão reset e disparar click
+  const reset = colorButtons.find(b => b.dataset.hue === "reset");
+  if(reset) reset.click();
+});
+
+/* aplica cor guardada ao abrir */
+function applySavedColor() {
+  const stored = localStorage.getItem(LOCAL_KEY);
+  if(stored) {
+    const btn = colorButtons.find(b => b.dataset.hue === stored);
+    if(btn) {
+      activateButton(btn);
+      setViewerHue(stored, btn.dataset.name);
+      return;
+    }
+  }
+  // se não houver, selecciona reset (padrão)
+  const def = colorButtons.find(b => b.dataset.hue === "reset");
+  if(def) {
+    activateButton(def);
+    setViewerHue("reset", "Padrão");
+  }
+}
+
+/* ======================
+   Loader do model-viewer
+   ====================== */
+viewer.addEventListener('load', () => {
+  // model carregado
+  loader.style.display = "none";
+  loader.setAttribute("aria-hidden", "true");
+  viewer.setAttribute("data-loaded", "true");
+});
+
+/* Em alguns browsers model-viewer pode disparar progresso - se quiser adicionar progress bar, dá para expandir */
+
+/* ======================
+   Partículas (criação otimizada + toggle)
+   ====================== */
+let particlesCreated = false;
+function createParticles() {
+  if(particlesCreated) return;
+  particlesCreated = true;
+  const count = Math.min(55, Math.floor(window.innerWidth / 16)); // adaptativo
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.classList.add("particle");
+    // pos inicial
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.top = (80 + Math.random() * 20) + "vh"; // start below
+    p.style.animationDuration = (6 + Math.random() * 12) + "s";
+    p.style.opacity = 0.08 + Math.random() * 0.45;
+
+    // variar delay para espalhar as partículas
+    p.style.animationDelay = (Math.random() * -12) + "s";
+
+    particlesContainer.appendChild(p);
+  }
+}
+
+/* ativa / desativa animação das partículas (mantém DOM para não re-criar sempre) */
+function toggleParticles(active) {
+  if(!particlesCreated) createParticles();
+  const parts = particlesContainer.querySelectorAll(".particle");
+  parts.forEach(p => {
+    p.style.animationPlayState = active ? "running" : "paused";
+  });
+}
+
+/* Só criar partículas uma vez quando o documento estiver pronto */
+document.addEventListener("DOMContentLoaded", () => {
+  // criar mas deixar pausa até painel visível
+  createParticles();
+
+  // aplicar cor guardada (caso painél abra sem chamar abrirModelo3D)
+  applySavedColor();
+});
+
+/* ======================
+   UI helper - expose for dev / botão demo
+   ====================== */
+/* Se quiseres abrir por código: chamar abrirModelo3D() */
+window.abrirModelo3D = abrirModelo3D;
+window.fecharModelo3D = fecharModelo3D;
+
+/* ======================
+   Inicialização - se preferires abrir automaticamente (comentado)
+   ====================== */
+// abrirModelo3D();
 </script>
 </body>
 </html>
